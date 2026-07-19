@@ -37,6 +37,9 @@ export default function QuoteGenerator() {
   const [delivery, setDelivery] = useState("none"); // none | local | out
   const [km, setKm] = useState("");
   const [customer, setCustomer] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [pointPerson, setPointPerson] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -94,6 +97,9 @@ export default function QuoteGenerator() {
     const parts = [];
     parts.push("OLIVE GROVE EVENTS — QUOTE");
     if (customer) parts.push(`Customer: ${customer}`);
+    if (email) parts.push(`Email: ${email}`);
+    if (phone) parts.push(`Phone: ${phone}`);
+    if (pointPerson) parts.push(`Point person: ${pointPerson}`);
     if (eventDate) parts.push(`Event date: ${eventDate}`);
     parts.push("");
     parts.push("Items:");
@@ -113,7 +119,7 @@ export default function QuoteGenerator() {
       parts.push("Refundable damage deposit: none");
     }
     return parts.join("\n");
-  }, [lines, customer, eventDate, subtotal, delivery, km, deliveryCost, total, deposit, depositLines]);
+  }, [lines, customer, email, phone, pointPerson, eventDate, subtotal, delivery, km, deliveryCost, total, deposit, depositLines]);
 
   const copy = async () => {
     try {
@@ -225,6 +231,29 @@ export default function QuoteGenerator() {
               value={customer}
               onChange={(e) => setCustomer(e.target.value)}
               style={styles.textInput}
+            />
+            <input
+              type="email"
+              inputMode="email"
+              placeholder="Customer email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ ...styles.textInput, marginTop: 8 }}
+            />
+            <input
+              type="tel"
+              inputMode="tel"
+              placeholder="Phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              style={{ ...styles.textInput, marginTop: 8 }}
+            />
+            <input
+              type="text"
+              placeholder="Point person"
+              value={pointPerson}
+              onChange={(e) => setPointPerson(e.target.value)}
+              style={{ ...styles.textInput, marginTop: 8 }}
             />
             <input
               type="text"
